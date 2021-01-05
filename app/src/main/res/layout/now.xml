@@ -4,6 +4,7 @@
 
 <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nowLayout"
     android:layout_width="match_parent"
     android:layout_height="530dp"
@@ -25,14 +26,14 @@
             android:background="@drawable/ic_home"
             />
 
-        <!--<Button
+        <Button
             android:id="@+id/navBtn2"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:background="@drawable/ic_location"
             android:layout_marginStart="325dp"
-            />-->
+            />
 
         <TextView
             android:id="@+id/placeName"
@@ -45,6 +46,12 @@
             android:singleLine="true"
             android:textColor="#fff"
             android:textSize="22sp" />
+
+<!--        <item-->
+<!--            android:id="@+id/settings"-->
+<!--            android:title="Settings"-->
+<!--            app:showAsAction="never" />-->
+
     </FrameLayout>
 
     <LinearLayout

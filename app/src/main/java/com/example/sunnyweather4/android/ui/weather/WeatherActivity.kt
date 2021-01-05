@@ -1,15 +1,23 @@
 package com.example.sunnyweather4.android.ui.weather
 
+//import com.example.sunnyweather4.android.logic.aMap.MyLocation
+
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,30 +25,23 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.amap.api.location.AMapLocation
-import com.amap.api.location.AMapLocationClient
-import com.amap.api.location.AMapLocationClientOption
-import com.amap.api.location.AMapLocationListener
 import com.example.sunnyweather4.android.R
-import com.example.sunnyweather4.android.SunnyWeatherApplication
-import com.example.sunnyweather4.android.logic.Repository
-import com.example.sunnyweather4.android.logic.model.Location
-import com.example.sunnyweather4.android.logic.model.Place
-//import com.example.sunnyweather4.android.logic.aMap.MyLocation
 import com.example.sunnyweather4.android.logic.model.Weather
 import com.example.sunnyweather4.android.logic.model.getSky
-import com.example.sunnyweather4.android.ui.place.PlaceViewModel
 import kotlinx.android.synthetic.main.activity_weather.*
 import kotlinx.android.synthetic.main.forecast.*
 import kotlinx.android.synthetic.main.life_index.*
 import kotlinx.android.synthetic.main.now.*
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class WeatherActivity : AppCompatActivity() {
 
     val viewModel by lazy { ViewModelProviders.of(this).get(WeatherViewModel::class.java) }
-//    var mLocationClient: AMapLocationClient? = null
+
+    //    var mLocationClient: AMapLocationClient? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= 21) {
@@ -78,6 +79,33 @@ class WeatherActivity : AppCompatActivity() {
         navBtn.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
+        navBtn2.setOnClickListener {
+
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "image/*"
+            val u: Uri = Uri.parse(
+                MediaStore.Images.Media.insertImage(
+                    contentResolver,
+                    capture(this.line1),
+                    null,
+                    null
+                )
+            ) //将截图bitmap存系统相册
+
+            intent.putExtra(Intent.EXTRA_STREAM, u)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            this.startActivity(Intent.createChooser(intent, ""))
+
+//            Log.d(this.toString(), "file delete")
+//            val f = File(u.toString())
+//            f.delete()
+//            Log.d(this.toString(), "${u}")
+
+        }
+
+
+
+
         drawerLayout.addDrawerListener(object : DrawerLayout.DrawerListener {
             override fun onDrawerStateChanged(newState: Int) {}
 
@@ -159,6 +187,22 @@ class WeatherActivity : AppCompatActivity() {
         ultravioletText.text = lifeIndex.ultraviolet[0].desc
         carWashingText.text = lifeIndex.carWashing[0].desc
         weatherLayout.visibility = View.VISIBLE
+    }
+
+
+    private fun capture(linearLayout: LinearLayout): Bitmap? {
+        var h = 0
+        val bitmap: Bitmap
+        for (i in 0 until linearLayout.childCount) h += linearLayout.getChildAt(i).height
+        // 创建对应大小的bitmap
+        bitmap = Bitmap.createBitmap(
+            linearLayout.width, h,
+            Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        linearLayout.draw(canvas)
+        return bitmap
+
     }
 
 
