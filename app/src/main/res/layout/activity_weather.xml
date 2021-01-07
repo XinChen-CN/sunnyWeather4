@@ -13,7 +13,7 @@
         <ScrollView
             android:id="@+id/weatherLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:overScrollMode="never"
             android:scrollbars="none"
             android:visibility="invisible">
@@ -47,8 +47,7 @@
             android:name="com.example.sunnyweather4.android.ui.place.PlaceFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
-            />
+            android:layout_marginTop="30dp" />
     </FrameLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -8,6 +8,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Path
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -26,6 +27,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.sunnyweather4.android.R
+import com.example.sunnyweather4.android.SunnyWeatherApplication.Companion.context
 import com.example.sunnyweather4.android.logic.model.Weather
 import com.example.sunnyweather4.android.logic.model.getSky
 import kotlinx.android.synthetic.main.activity_weather.*
@@ -96,10 +98,8 @@ class WeatherActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             this.startActivity(Intent.createChooser(intent, ""))
 
-//            Log.d(this.toString(), "file delete")
-//            val f = File(u.toString())
-//            f.delete()
-//            Log.d(this.toString(), "${u}")
+
+            Log.d(this.toString(), "intent:$intent")
 
         }
 
@@ -191,7 +191,7 @@ class WeatherActivity : AppCompatActivity() {
 
 
     private fun capture(linearLayout: LinearLayout): Bitmap? {
-        var h = 0
+        var h = 10
         val bitmap: Bitmap
         for (i in 0 until linearLayout.childCount) h += linearLayout.getChildAt(i).height
         // 创建对应大小的bitmap

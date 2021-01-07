@@ -25,15 +25,21 @@
             android:layout_gravity="center_vertical"
             android:background="@drawable/ic_home"
             />
-
+        <!--<Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="320dp"
+            android:text="SpinnerDemo"/>-->
         <Button
             android:id="@+id/navBtn2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/ic_location"
+            android:background="@drawable/ic_share"
             android:layout_marginStart="325dp"
             />
+
 
         <TextView
             android:id="@+id/placeName"

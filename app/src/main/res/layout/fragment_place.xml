@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?android:windowBackground">
 
     <ImageView
@@ -15,13 +16,13 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/blue_F4">
+
         <Button
             android:id="@+id/LocationBtn"
-            android:layout_gravity="center_vertical"
-
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@drawable/nav_location"/>
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/nav_location" />
 
 
         <EditText
@@ -35,7 +36,11 @@
             android:hint="@string/enter_address"
             android:inputType="text"
             android:paddingStart="10dp"
-            android:paddingEnd="10dp" />
+            android:paddingEnd="10dp"
+
+            />
+
+
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
